@@ -1742,6 +1742,7 @@ var sizeTable = {
 
 	"H": [32, 32],  // huge
 	"J": [32, 32],  // huge
+	"g": [32, 32],  // huge
 	
 	"p": [32, 16], // crusher
 	"n": [64, 16], // sign
@@ -1771,6 +1772,7 @@ var colorTable = {
 
 	"c": [200, 200, 10], // coin
 	"t": [50, 10, 150], // trampoline
+	"w": [50, 50, 200], // water
 	
 	"h": [20, 200, 200], // heli
 	"n": [10, 120, 120], // noheli
