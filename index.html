@@ -48,6 +48,8 @@
 			<div>
 				<input id="b_path" type="text" value="https://oswaldgame.netlify.app" oninput="game_url = this.value; localStorage['oswed_savedpath'] = this.value"/>
 				<label><input id="b_heli" type="checkbox" oninput="helitest = this.checked; localStorage['oswed_helitest'] = this.checked" /> Heli </label>
+				<label><input id="b_spd1" type="checkbox" oninput="speedtest1 = this.checked; localStorage['oswed_fast'] = this.checked" /> Fast </label>
+				<label><input id="b_spd2" type="checkbox" oninput="speedtest2 = this.checked; localStorage['oswed_fullspeed'] = this.checked" /> Full speed </label>
 				<button onclick="levelPlay()">Play</button>
 			</div>
 		</div>
@@ -155,7 +157,13 @@
 			}
 			
 			document.getElementById("b_heli").checked = (localStorage["oswed_helitest"] === "true");
-			helitest = (localStorage["oswed_helitest"] === "true");
+			speedtest1 = (localStorage["oswed_helitest"] === "true");
+			
+			document.getElementById("b_spd1").checked = (localStorage["oswed_fast"] === "true");
+			speedtest2 = (localStorage["oswed_fast"] === "true");
+			
+			document.getElementById("b_spd2").checked = (localStorage["oswed_fullspeed"] === "true");
+			fullspeedtest = (localStorage["oswed_fullspeed"] === "true");
 			
 			var wHelp = document.getElementById("w_help");
 			function toggleHelp() {

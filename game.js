@@ -1600,7 +1600,7 @@ this.tiles = [
 this.objects = [
 [{o:o_main, x:0, y:0}]];
 this.start = function() {
-__room_start__(this, s_main, 1280, 160, 60, 209, 209, 209, bg_grid.image, 1, 1, 0, 640, 160, o_camera, 640, 50);
+__room_start__(this, s_main, 1920, 160, 60, 209, 209, 209, bg_grid.image, 1, 1, 0, 640, 160, o_camera, 640, 50);
 };
 }
 var s_main = new __s_main();
@@ -1621,6 +1621,8 @@ var clear = false;
 var editor_paused = false;
 var game_url = "https://oswaldgame.netlify.app";
 var helitest = false;
+var speedtest1 = false;
+var speedtest2 = false;
 
 function levelSave() {
 	let lvlen = lvlend/16;
@@ -1684,7 +1686,10 @@ function levelClear() {
 }
 
 function levelPlay() {
-	window.open(game_url + "?prefabtest="+lvloutput.replaceAll("+", "%2B") + ((helitest == true) ? "&helitest" : ""), '_blank').focus();
+	let spd = 0;
+	if(speedtest1 == true) spd = 2.0;
+	if(speedtest2 == true) spd = 2.3;
+	window.open(game_url + "?prefabtest="+lvloutput.replaceAll("+", "%2B") + ((helitest == true) ? "&helitest" : "") + ((spd != 0) ? "&speedtest="+spd.toString() : ""), '_blank').focus();
 }
 
 var domoKeyboardString = document.getElementById("domo_keyboardstring");
@@ -1772,10 +1777,15 @@ var colorTable = {
 
 	"c": [200, 200, 10], // coin
 	"t": [50, 10, 150], // trampoline
-	"w": [50, 50, 200], // water
 	
 	"h": [20, 200, 200], // heli
 	"n": [10, 120, 120], // noheli
+	
+	"w": [50, 50, 200], // water
+	"{": [70, 70, 250], // watercurrent
+	"}": [70, 70, 250], // watercurrent
+	"[": [70, 70, 250], // watercurrent
+	"]": [70, 70, 250], // watercurrent
 }
 
 /***********************************************************************
