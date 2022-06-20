@@ -1621,6 +1621,7 @@ var clear = false;
 var editor_paused = false;
 var game_url = "https://oswaldgame.netlify.app";
 var helitest = false;
+var watertest = false;
 var speedtest1 = false;
 var speedtest2 = false;
 
@@ -1689,7 +1690,7 @@ function levelPlay() {
 	let spd = 0;
 	if(speedtest1 == true) spd = 2.0;
 	if(speedtest2 == true) spd = 2.3;
-	window.open(game_url + "?prefabtest="+lvloutput.replaceAll("+", "%2B") + ((helitest == true) ? "&helitest" : "") + ((spd != 0) ? "&speedtest="+spd.toString() : ""), '_blank').focus();
+	window.open(game_url + "?prefabtest="+lvloutput.replaceAll("+", "%2B") + ((helitest == true) ? "&helitest" : "") + ((watertest == true) ? "&watertest" : "") + ((spd != 0) ? "&speedtest="+spd.toString() : ""), '_blank').focus();
 }
 
 var domoKeyboardString = document.getElementById("domo_keyboardstring");
