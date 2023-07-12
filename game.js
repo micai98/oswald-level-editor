@@ -1619,11 +1619,12 @@ var lvloutput = "";
 var lvloutput_pretty = "";
 var clear = false;
 var editor_paused = false;
-var game_url = "https://oswaldgame.netlify.app";
+var game_url = "https://oswaldgame.netlify.app/play.html";
 var helitest = false;
 var watertest = false;
 var speedtest1 = false;
 var speedtest2 = false;
+var compress_levels = false;
 
 function levelSave() {
 	let lvlen = lvlend/16;
@@ -1644,10 +1645,11 @@ function levelSave() {
 	
 	for(let i = 0; i < lvlheight; i++) {
 		rows[i] = rows[i].join("");
+		if(compress_levels) rows[i] = rows[i].replaceAll(".....", "&");
 	}
 	
 	lvloutput = rows.join(",");
-	lvloutput_pretty = rows.join(",\\\r\n");
+	lvloutput_pretty = rows.join(",\r\n");
 	if(domoLvlOutput) domoLvlOutput.value = lvloutput_pretty;
 	if(domoLvlOutput) domoLvlOutput.innerHTML = lvloutput_pretty;
 	if(domoLvlOutput) domoLvlOutput.innerText = lvloutput_pretty;
@@ -1664,6 +1666,7 @@ function levelLoad(lvl="") {
 	for(i=0; i<=len-1; i++) {
 		ce = lvl[i];
 		if(ce == ".") cx += 1;
+		else if(ce == "&") cx += 5;
 		else if (ce == ",") {
 			if(cx*16 > lvlend) lvlend = cx*16;
 			cx = 0; 
@@ -1758,10 +1761,11 @@ var colorTable = {
 	" ": [150, 150, 150],
 	".": [150, 150, 150],
 	",": [100, 100, 100],
+	"&": [100, 100, 100],
 	"\\": [100, 100, 100],
 	"\"": [100, 100, 100],
 	"'": [100, 100, 100],
-	
+	"P": [20,250,40], // pipe
 
 
 	"+": [10, 100, 10],
@@ -1769,6 +1773,7 @@ var colorTable = {
 	"-": [10, 100, 10],
 	"^": [10, 100, 10],
 	"v": [10, 100, 10],
+	"V": [30, 100, 30],
 	"<": [10, 100, 10],
 	">": [10, 100, 10],
 	"|": [10, 70, 10],
@@ -1777,7 +1782,12 @@ var colorTable = {
 	")": [80, 120, 10],
 
 	"c": [200, 200, 10], // coin
+	"Q": [200, 150, 10], // coinblock
+	"O": [170, 120, 0], // coinblock
 	"t": [50, 10, 150], // trampoline
+	"_": [80, 125, 200], // jumpboost
+	"$": [123, 123, 10], // sandstorm
+	"`": [200, 10, 200], // entity mod
 	
 	"h": [20, 200, 200], // heli
 	"n": [10, 120, 120], // noheli
@@ -1787,6 +1797,13 @@ var colorTable = {
 	"}": [70, 70, 250], // watercurrent
 	"[": [70, 70, 250], // watercurrent
 	"]": [70, 70, 250], // watercurrent
+	
+	//enemies that dont get their right colour assigned automatically
+	";": [150,50,50],
+	":": [150,50,50],
+	"!": [150,50,50],
+	"%": [150,50,50],
+	"@": [150,50,50],
 }
 
 /***********************************************************************
